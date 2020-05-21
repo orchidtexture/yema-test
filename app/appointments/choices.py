@@ -1,4 +1,5 @@
 STATUS_CHOICES = [
-    ('REQ', 'Requested'),
-    ('SEN', 'Sent'),
+    ('REQ', 'Solicitada'),
+    ('SND', 'Enviar'),
+    ('SNT', 'Enviada'),
 ]

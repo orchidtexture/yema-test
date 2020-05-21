@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 from .choices import STATUS_CHOICES
 
@@ -32,17 +34,17 @@ class Appointment(models.Model):
     def __str__(self):
         if self.status == 'SEN':
             return (
-                'Appointment for ' + self.appointment_request.first_name + ' ' 
-                + self.appointment_request.last_name + ' with Doctor ' 
+                'Cita para ' + self.appointment_request.first_name + ' ' 
+                + self.appointment_request.last_name + ' con el Doctor ' 
                 + self.pediatrician_first_name + ' ' 
-                + self.pediatrician_last_name + ' on '
+                + self.pediatrician_last_name + ' el '
                 + str(self.date)
             )
         else:
             return (
-                'Appointment for ' + self.appointment_request.first_name + ' ' 
+                'Cita para ' + self.appointment_request.first_name + ' ' 
                 + self.appointment_request.last_name 
-                + ' pending for assignment.'
+                + ' pendiente de asignación.'
             )
 
 
@@ -54,3 +56,10 @@ class AppointmentRequest(models.Model):
 
     def __str__(self):
         return self.email
+
+@receiver(post_save, sender=AppointmentRequest)
+def create_appointment(sender, instance, **kwargs):
+    """ 
+    Django signal that creates an Appointment instance after the AppointmentRequest is created
+    """
+    Appointment.objects.create(**{'appointment_request': instance})
