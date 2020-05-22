@@ -46,6 +46,25 @@ class Appointment(models.Model):
                 + self.appointment_request.last_name 
                 + ' pendiente de asignación.'
             )
+    
+    @property
+    def is_completed(self):
+        """
+        Property that returns true if all fields of the instance are populated
+        or returns a list of non-populated fields
+        """
+        fields_to_complete = []
+        if self.pediatrician_first_name is None:
+            fields_to_complete.append('Nombre del pediatra')
+        if self.pediatrician_last_name is None:
+            fields_to_complete.append('Apellido del pediatra')
+        if self.date is None:
+            fields_to_complete.append('Fecha de la consulta')
+        if len(fields_to_complete) > 0:
+            return fields_to_complete
+        else:
+            return True
+
 
 
 class AppointmentRequest(models.Model):
