@@ -81,7 +81,8 @@ class Appointment(models.Model):
             'name': self.appointment_request.first_name,
             'date': date,
             'time': time,
-            'doctor_name': doctor_name
+            'doctor_name': doctor_name,
+            'comment': self.comment
         }
         msg_plain = render_to_string('email.txt', context)
         msg_html = render_to_string('email.html', context)
