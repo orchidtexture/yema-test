@@ -14,6 +14,7 @@ class AppointmentAdmin(admin.ModelAdmin):
         if "_send-email" in request.POST:
             if obj.is_completed == True:
                 #TODO: Send email
+                obj.send_appointment_email()
                 obj.status = 'SNT'
                 obj.save()
                 self.message_user(request, "Se ha enviado un email a " + obj.appointment_request.first_name)

@@ -1,6 +1,8 @@
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
 
 from .choices import STATUS_CHOICES
 
@@ -65,6 +67,20 @@ class Appointment(models.Model):
         else:
             return True
 
+    def send_appointment_email(self):
+        """
+        Method to send an email with the appointment information to the patient
+        """
+        msg_plain = render_to_string('email.txt', {'name': 'Luigi'})
+        msg_html = render_to_string('email.html', {'name': 'Luigi'})
+        send_mail(
+            'Tu cita con el pediatra',
+            msg_plain,
+            'luisdaniel.guzmanp+sendgrid@gmail.com',
+            [self.appointment_request.email],
+            html_message=msg_html,
+        )
+
 
 
 class AppointmentRequest(models.Model):
@@ -81,4 +97,5 @@ def create_appointment(sender, instance, **kwargs):
     """ 
     Django signal that creates an Appointment instance after the AppointmentRequest is created
     """
-    Appointment.objects.create(**{'appointment_request': instance})
+    if instance.appointment is None:
+        Appointment.objects.create(**{'appointment_request': instance})
