@@ -32,13 +32,13 @@ class Appointment(models.Model):
     )
 
     def __str__(self):
-        if self.status == 'SEN':
+        if self.status == 'SNT':
             return (
-                'Cita para ' + self.appointment_request.first_name + ' ' 
+                'Cita de ' + self.appointment_request.first_name + ' ' 
                 + self.appointment_request.last_name + ' con el Doctor ' 
                 + self.pediatrician_first_name + ' ' 
                 + self.pediatrician_last_name + ' el '
-                + str(self.date)
+                + str(self.date) #TODO: make date and time human readable
             )
         else:
             return (
