@@ -71,8 +71,20 @@ class Appointment(models.Model):
         """
         Method to send an email with the appointment information to the patient
         """
-        msg_plain = render_to_string('email.txt', {'name': 'Luigi'})
-        msg_html = render_to_string('email.html', {'name': 'Luigi'})
+        date = self.date.date()
+        time = self.date.time()
+        doctor_name = (
+            self.pediatrician_first_name + ' ' 
+            + self.pediatrician_last_name
+        )
+        context = {
+            'name': self.appointment_request.first_name,
+            'date': date,
+            'time': time,
+            'doctor_name': doctor_name
+        }
+        msg_plain = render_to_string('email.txt', context)
+        msg_html = render_to_string('email.html', context)
         send_mail(
             'Tu cita con el pediatra',
             msg_plain,
