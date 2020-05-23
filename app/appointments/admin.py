@@ -7,7 +7,6 @@ from .models import Appointment, AppointmentRequest
 
 @admin.register(Appointment)
 class AppointmentAdmin(admin.ModelAdmin):
-    ...
     change_form_template = "admin/change_form.html"
 
     def response_change(self, request, obj):
@@ -24,4 +23,8 @@ class AppointmentAdmin(admin.ModelAdmin):
             return HttpResponseRedirect(".")
         return super().response_change(request, obj)
 
-admin.site.register(AppointmentRequest)
+
+@admin.register(AppointmentRequest)
+class AppointmentRequestAdmin(admin.ModelAdmin):
+     def has_add_permission(self, request, obj=None):
+        return False
