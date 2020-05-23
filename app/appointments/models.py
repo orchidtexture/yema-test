@@ -1,6 +1,4 @@
 from django.db import models
-from django.db.models.signals import post_save
-from django.dispatch import receiver
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 
@@ -95,7 +93,6 @@ class Appointment(models.Model):
         )
 
 
-
 class AppointmentRequest(models.Model):
     """ A model for appointment requests performed by a patient """
     first_name = models.CharField(max_length=50)
@@ -104,11 +101,3 @@ class AppointmentRequest(models.Model):
 
     def __str__(self):
         return self.email
-
-@receiver(post_save, sender=AppointmentRequest)
-def create_appointment(sender, instance, **kwargs):
-    """ 
-    Django signal that creates an Appointment instance after the AppointmentRequest is created
-    """
-    if instance.appointment is None:
-        Appointment.objects.create(**{'appointment_request': instance})
