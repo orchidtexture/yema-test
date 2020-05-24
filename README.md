@@ -3,14 +3,14 @@
 ## Development
 
 |Service| Service Name | Port |
-|---|---|---|---|
+|---|---|---|
 | db | yema-test_db_1 | 5432 |
 | web | yema-test_web_1 | 8000 |
 
 ## Production
 
 |Service| Service Name | Port |
-|---|---|---|---|
+|---|---|---|
 | db | yema-test_db_1 | 5432 |
 | web | yema-test_web_1 | 8000 |
 | nginx | nginx_1 | 1337 |
