@@ -8,8 +8,9 @@ class AppointmentRequestEndpoint(generics.CreateAPIView):
     queryset = AppointmentRequest.objects.all()
     serializer_class = AppointmentRequestSerializer
 
-    def create(self, request, *args, **kwargs):
-        """ I wanted to do some stuff with serializer.data here """
-        Appointment.objects.create(**{'appointment_request': self})
-
-        return super(MemberCreate, self).create(request, *args, **kwargs)
+    def perform_create(self, serializer):
+        """ creates a related appointment object """
+        appointment_request = serializer.save()
+        Appointment.objects.create(**{
+                'appointment_request': appointment_request
+        })
