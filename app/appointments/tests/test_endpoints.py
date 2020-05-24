@@ -15,6 +15,10 @@ class AppointmentRequestTest(TestCase):
         }
 
     def test_appointment_create(self):
+        """ 
+        Tests if appointment request endpoint creates an appointment request 
+        instance and a related appointment
+        """
         client = APIClient()
         response = client.post(
             'http://localhost:8000/api/v1/appointments/request/',
