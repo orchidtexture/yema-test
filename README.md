@@ -26,6 +26,7 @@
 4. Build services `docker-compose -f docker-compose.prod.yml up -d --build`
 5. Migrate `docker-compose -f docker-compose.prod.yml exec web python manage.py migrate --noinput`
 6. Collect statics `docker-compose -f docker-compose.prod.yml exec web python manage.py collectstatic --no-input --clear`
+* **url** - http://localhost:1337/
 
 ## Basic Usage
 
