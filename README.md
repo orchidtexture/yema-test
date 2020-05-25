@@ -19,7 +19,8 @@
 
 1. Install docker https://www.docker.com/get-docker
 2. Install docker-compose https://docs.docker.com/compose/install/
-3. Start the **docker-compose** service.
+3. Create `.env.prod`, `.env.prod.db` and `.env.dev` files in root directory.
+4. Start the **docker-compose** service.
 
 ### Production
 
