@@ -49,20 +49,6 @@
 
 - Open the shell `docker-compose -f docker-compose.prod.yml exec web /bin/sh`
 
-## Data
-
-**create a backup database**
-
-```
-docker-compose exec web /bin/sh -c -l "./manage.py dumpdata --natural-foreign --exclude auth.permission --exclude contenttypes --indent 2 > data/initial_to_dev.json""
-```
-
-**load initial data**
-
-```
-docker-compose exec web /bin/sh -c -l "./manage.py loaddata data/initial_to_dev.json"
-```
-
 ## Django tests
 ```
 $ docker-compose exec web python manage.py test appointments/tests
