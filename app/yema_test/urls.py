@@ -15,8 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework_swagger.views import get_swagger_view
 
 admin.site.site_header = "Yema Test Luis Daniel Guzmán"
+schema_view = get_swagger_view(title='Yema Test Swagger')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,4 +26,5 @@ urlpatterns = [
         ('appointments.api_v1.urls', 'api_v1'),
         namespace='api_v1_appointments')
     ),
+    path('docs/', schema_view)
 ]
