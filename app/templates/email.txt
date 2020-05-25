@@ -1,0 +1,17 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+</head>
+
+<body>
+  <h2>Hola {{ name }}</h2>
+  <p>La cita que solicitaste se llevará a cabo el {{ date }}. a las {{ time }}</p>
+  <p>Con el Doctor {{ doctor_name }}</p>
+  {% if comment is not None %}
+  <p>Comentarios: {{ comment }}</p>
+  {% endif %}
+  <p>¡Gracias por tu preferencia!</p>
+</body>
+</html>
