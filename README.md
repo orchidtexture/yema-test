@@ -66,7 +66,7 @@ $ docker-compose exec web python manage.py test appointments/tests
 ## Docs
 
 * **yema-test API** - http://localhost:8000/docs/
-* **Appointment request Endpoint** - http://localhost:1337/api/v1/appointments/request/
+* **Appointment request Endpoint** - http://localhost:8000/api/v1/appointments/request/
 * **HTTP Status Codes** - https://www.restapitutorial.com/httpstatuscodes.html
 
 **Note: The email sent via admin may land in your spam folder due to a personal gmail account being used with Sendgrid.**
