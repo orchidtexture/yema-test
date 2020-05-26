@@ -24,14 +24,17 @@
 
 ### Production
 
-4. Build services `docker-compose -f docker-compose.prod.yml up -d --build`
-5. Migrate `docker-compose -f docker-compose.prod.yml exec web python manage.py migrate --noinput`
-6. Collect statics `docker-compose -f docker-compose.prod.yml exec web python manage.py collectstatic --no-input --clear`
+3. If a development built was performed before, execute `docker-compose down -v`
+5. Build services `docker-compose -f docker-compose.prod.yml up -d --build`
+6. Migrate `docker-compose -f docker-compose.prod.yml exec web python manage.py migrate --noinput`
+7. Collect statics `docker-compose -f docker-compose.prod.yml exec web python manage.py collectstatic --no-input --clear`
 * **url** - http://localhost:1337/
 
 ## Basic Usage
 
 ### Development
+
+- If a production built was performed before, execute `docker-compose -f docker-compose.prod.yml down -v`
 
 - Build all services `docker-compose up --build`
 
@@ -63,4 +66,7 @@ $ docker-compose exec web python manage.py test appointments/tests
 ## Docs
 
 * **yema-test API** - http://localhost:8000/docs/
+* **Appointment request Endpoint** - http://localhost:1337/api/v1/appointments/request/
 * **HTTP Status Codes** - https://www.restapitutorial.com/httpstatuscodes.html
+
+**Note: The email sent via admin may land in your spam folder due to a personal gmail account being used with Sendgrid.**
